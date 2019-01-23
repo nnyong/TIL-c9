@@ -15,6 +15,7 @@ db=SQLAlchemy(app)
 # migrate 초기화
 migrate=Migrate(app,db)
 
+
 # table 만들기
 class User(db.Model):
     __tablename__='uesrs'
@@ -66,3 +67,16 @@ class User(db.Model):
 
 # ORDER+LIMIT+OFFSET
 # users=User.query.order_by(User.username).limit(1).offset(2).all()
+
+# [DELETE]
+# DELETE FROM users WHERE id=1;
+# user=User.query.get(1)
+# db.session.delete(user)
+# db.session.commit()
+
+# [UPDATE]
+# UPDATE users SET username='yh' WHERE id=2;
+# user = User.query.get(2)
+# user.username='yh'
+# db.session.commit()
+
