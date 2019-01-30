@@ -18,6 +18,7 @@ from django.urls import path,include
 from posts import views
 
 urlpatterns = [
+    path('questions/',include('questions.urls')),
     path('posts/',include('posts.urls')),
     path('admin/', admin.site.urls),
 ]
