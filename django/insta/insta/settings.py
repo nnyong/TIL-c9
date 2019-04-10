@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'imagekit',
+    'accounts',
     # 'posts.app.PostsConfig', 옛날 버전!
     'posts', # 요즘버전!
 ]

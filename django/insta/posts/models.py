@@ -1,12 +1,14 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from django.conf import settings
 
 def post_image_path(instance,filename):
     return 'posts/{}/{}.jpg'.format(instance.content, filename)
     
 # Create your models here.
 class Post(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     content=models.TextField()
     # image=models.ImageField(blank=True) #blank=True:이미지를 업로드하지 않아도 post만들기 가능하다는 의미.
     image=ProcessedImageField(
