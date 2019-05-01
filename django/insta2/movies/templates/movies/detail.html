@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block container %}
+    <div>
+        <h1>{{ movie.title }}</h1>
+        <img src="{{ movie.poster_url }}"></img>
+        <p>관객수: {{ movie.audience }}</p>
+        <p>줄거리: {{ movie.description }}</p>
+    </div>
+    <hr>
+    <div>
+        <form method='POST'>
+            {% csrf_token %}
+            {{ scoreform }}
+            <input type="submit" value="Submit"/>
+        </form>
+    </div>
+    <p>평점목록</p>
+    <div>
+    {% for score in movie.score_set.all %}
+    <p><strong>{{ score.user.username }}</strong> {{ score.content }} ★{{ score.score }}</p>
+    {% if user == score.user %}
+        <a href='{% url 'movies:score_delete' movie.id score.id %}'>삭제</a>
+    {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

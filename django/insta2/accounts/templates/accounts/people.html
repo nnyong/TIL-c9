@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block container %}
+    <h1>{{ person.username }}</h1>
+    <div>
+        {% if user.is_authenticated %}
+            {% if user != person %}
+                {% if user in person.followers.all %}
+                    <a href='{% url 'accounts:follow' person.id %}'>Unfollow</a>
+                {% else %}
+                    <a href='{% url 'accounts:follow' person.id %}'>Follow</a>
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    </div>
+    
+    <div>
+        follower {{ person.followers.count }}
+        following {{ person.followings.count }}
+    </div>
+{% endblock %}

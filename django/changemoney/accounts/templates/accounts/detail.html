@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block container %}
+<h1>{{ person.username }}</h1>
+{% if user != person %}
+    {% if user in person.followers.all %}
+        <a href='{% url 'accounts:follow' person.id %}'>UnFollow</a>
+    {% else %}
+        <a href='{% url 'accounts:follow' person.id %}'>Follow</a>
+    {% endif %}
+{% endif %}
+<hr>
+<p>follower {{ person.followers.count }}</p>
+<p>following {{ person.followings.count}}</p>
+<hr>
+<p>평점 목록</p>
+{% for score in person.score_set.all %}
+<p><strong>{{ score.movie.title }}</strong> {{ score.content }} ★{{ score.score }}</p>
+{% endfor %}
+<hr>
+<p>추천 영화</p>
+<p>{{ recommend_movie.title }}</p>
+<img src='{{ recommend_movie.poster_url }}'>
+{% endblock %}
