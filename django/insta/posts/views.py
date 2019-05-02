@@ -90,8 +90,14 @@ def comment_create(request,post_id):
         comment.user=request.user
         comment.post_id=post_id
         comment.save()
-    return redirect('posts:list')
-    
+    # return redirect('posts:list')
+    return JsonResponse({
+                            'id':comment.id,
+                            'postId':post_id,
+                            'username':comment.user.username,
+                            'content':comment.content,
+                        })
+                        
 # from django.views.decorators.http import require_http_methods
 @require_http_methods(['GET','POST'])
 def comment_delete(request,post_id,comment_id):
